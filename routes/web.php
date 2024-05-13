@@ -1,8 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashBoardViews;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExportController;
+use App\Http\Controllers\ImportController;
+use App\Http\Controllers\VehiculController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +47,19 @@ Route::put('/dashboard/client/update', [UserController::class, 'updataeClient'])
 Route::get('/dashboard/clients/add', [DashBoardViews::class, 'addclient'])->name('dashboard.clients.add');
 
 Route::post('/dashboard/clients/add', [UserController::class, 'addNewClient']);
+
+
+Route::get('/import', [ImportController::class, 'index'])->name('import.get');
+
+Route::post('/import', [ImportController::class, 'import'])->name('import.post');
+
+
+Route::get('/export', [ExportController::class, 'index'])->name('export.get');
+
+Route::get('/export-users-pdf', [ExportController::class, 'exportUsersPdf'])->name('export.users.pdf');
+
+Route::get('/export-users', [ExportController::class, 'exportUsers'])->name('export.users');
+
+Route::get('/dashboard/vehicles', [VehiculController::class, "getAllVecles"])->name('getAllVecles');
+
+Route::post('/dashboard/vehicle/delete', [VehiculController::class, 'deletevehicle'])->name('dashboard.vehicle.delete');
