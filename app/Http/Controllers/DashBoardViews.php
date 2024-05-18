@@ -13,11 +13,13 @@ class DashBoardViews extends Controller
     public function stats()
     {
         $usersNumber = User::where('role', 'CLIENT')->count();
+        $mechanicsNumber = User::where('role', 'MECHANIC')->count();
         $vehiclesNumber = Vehicle::all()->count();
 
         return view('pages.dashboard.stats', [
             'usersNumber' => $usersNumber,
-            'vehiclesNumber' => $vehiclesNumber
+            'vehiclesNumber' => $vehiclesNumber,
+            "mechanicsNumber" => $mechanicsNumber
         ]);
     }
 
@@ -38,6 +40,22 @@ class DashBoardViews extends Controller
         return view('pages.dashboard.addClient');
     }
 
+    public function addmechanic()
+    {
+        return view('pages.dashboard.addMechanic');
+    }
+
+    public function mechanicians()
+    {
+        // $user = User::find(10);
+        // $carsOfSaad = $user->vehicles;
+        // dd($carsOfSaad);
+        $users = User::where('role', 'MECHANIC')->paginate(10);
+
+        return view('pages.dashboard.mechanicians', [
+            'users' => $users
+        ]);
+    }
 
 
 }

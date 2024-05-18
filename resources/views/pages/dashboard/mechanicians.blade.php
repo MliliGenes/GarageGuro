@@ -2,17 +2,6 @@
 
 @section('content')
 
-@if(session('success'))
-    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-        <span class="block sm:inline">{{ session('success') }}</span>
-    </div>
-@endif
-
-@if(session('error'))
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-        <span class="block sm:inline">{{ session('error') }}</span>
-    </div>
-@endif
 
 
 <div>
@@ -137,10 +126,9 @@
                 </button>
             </div>
             <div class="p-4 md:p-5 space-y-4">
-                <form class="space-y-4" action="/dashboard/client/update"
-                    method="post">
+                <form class="space-y-4" action="{{route('dashboard.client.update')}}" method="post">
                     @csrf
-                    @method('PUT')
+                    @method('PUT') <!-- Use PUT method for updating -->
                     <input type="hidden" name="id" id="update-id">
                     <div class="mb-5">
                         <label for="firstName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
@@ -212,7 +200,6 @@
             $('#address').val(clientData.address);
             $('#phoneNumber').val(clientData.phoneNumber);
             $('#email').val(clientData.email);
-            $('#password').val(clientData.password);
             // Show the delete modal
             $('#update-modal').removeClass('hidden');
             $('#update-id').val(id);

@@ -53,7 +53,6 @@ Route::get('/import', [ImportController::class, 'index'])->name('import.get');
 
 Route::post('/import', [ImportController::class, 'import'])->name('import.post');
 
-
 Route::get('/export', [ExportController::class, 'index'])->name('export.get');
 
 Route::get('/export-users-pdf', [ExportController::class, 'exportUsersPdf'])->name('export.users.pdf');
@@ -63,3 +62,40 @@ Route::get('/export-users', [ExportController::class, 'exportUsers'])->name('exp
 Route::get('/dashboard/vehicles', [VehiculController::class, "getAllVecles"])->name('getAllVecles');
 
 Route::post('/dashboard/vehicle/delete', [VehiculController::class, 'deletevehicle'])->name('dashboard.vehicle.delete');
+
+Route::get('/dashboard/vehicle/{id}', [VehiculController::class, 'getVehicleByID'])->name('dashboard.vehicle');
+
+
+Route::put('/dashboard/vehicle/update', [VehiculController::class, 'updataeVehicle'])->middleware(['auth', 'verified'])->name('dashboard.vehicle.update');
+
+
+Route::get('/dashboard/vehicles/add', [VehiculController::class, 'addvehicle'])->name("dashboard.vehicles.add");
+
+Route::post('/dashboard/vehicles/add', [VehiculController::class, 'addvehiclepost'])->name("dashboard.vehicles.add.post");
+
+Route::get('/import-vehicles', [ImportController::class, 'index2'])->name('import.vehicles.get');
+
+Route::post('/import-vehicles', [ImportController::class, 'import2'])->name('import.vehicles.post');
+
+Route::get('/export-vehicles', [ExportController::class, 'index2'])->name('export.vehicles.get');
+
+Route::get('/export-vehicles-pdf', [ExportController::class, 'exportVehiclesPdf'])->name('export.vehicles.pdf');
+
+Route::get('/export-vehicles-xlsx', [ExportController::class, 'exportVehicles'])->name('export.vehicles');
+
+Route::get('/dashboard/mechanicians', [DashBoardViews::class, "mechanicians"])->name('mechanicians');
+
+Route::get('/dashboard/mechanicians/add', [DashBoardViews::class, "addmechanic"])->name('dashboard.mechanicians.add');
+
+Route::post('/dashboard/mechanicians/add', [UserController::class, "addNewMechanic"]);
+
+
+Route::get('/import-mechanic', [ImportController::class, 'index'])->name('import.mechanic.get');
+
+Route::post('/import-mechanic', [ImportController::class, 'import'])->name('import.mechanic.post');
+
+Route::get('/export-mechanic', [ExportController::class, 'index'])->name('export.mechanic.get');
+
+Route::get('/export-mechanics-pdf', [ExportController::class, 'exportUsersPdf'])->name('export.mechanics.pdf');
+
+Route::get('/export-mechanics', [ExportController::class, 'exportUsers'])->name('export.mechanic');

@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('model');
             $table->string('fuelType');
             $table->string('registration');
-            $table->string('photos')->nullable();
+            $table->json('photos')->nullable();
             $table->foreignId('clientID')->constrained('users');
             $table->timestamps();
         });

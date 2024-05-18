@@ -100,6 +100,19 @@ class UserController extends Controller
         ]);
     }
 
+    public function createMechanicians(array $data)
+    {
+        return User::create([
+            'firstName' => $data['first_name'],
+            'lastName' => $data['last_name'],
+            'phoneNumber' => $data['phone'],
+            'email' => $data['email'],
+            'role' => "MECHANIC",
+            'address' => $data['address'],
+            'password' => Hash::make($data['password'])
+        ]);
+    }
+
     public function logout()
     {
         Session::flush();
@@ -143,23 +156,29 @@ class UserController extends Controller
     public function updataeClient(Request $request)
     {
         $id = $request->id;
-        $data = $request->all();
-        $validated = $request->validate([
-            'password' => 'required|min:8',
-            'email' => 'required|email',
-            'first_name' => 'required|min:3',
-            'last_name' => 'required|min:3',
-            'phone' => 'required',
-            'address' => 'required',
-        ]);
+        $user = User::find($id);
+        // dd($request->all());
 
-        if (!$validated) {
-            return redirect()->back()->withErrors($validated)->withInput();
+        // $validated = $request->validate([
+        //     'email' => 'required|email',
+        //     'first_name' => 'required|min:3',
+        //     'last_name' => 'required|min:3',
+        //     'phone' => 'required',
+        //     'address' => 'required',
+        //     'password' => 'nullable|min:8',
+        // ]);
+
+        // if (!$validated) {
+        //     return redirect()->route('dashboard.clients')->withSuccess($validated);
+        // }
+
+        if ($request['password'] != null) {
+            $request["password"] = Hash::make($request["password"]);
+        } else {
+            $request["password"] = $user->password;
         }
 
-        $data["password"] = Hash::make($data["password"]);
-        $user = User::find($id);
-        $user->update($data);
+        $user->update($request->all());
         return redirect()->back()->withSuccess('User updated successfully');
     }
 
@@ -196,5 +215,33 @@ class UserController extends Controller
         $data["password"] = Hash::make($data["password"]);
         $createUser = $this->create($data);
         return redirect()->route('dashboard.clients')->withSuccess('User created successfully');
+    }
+
+    public function addNewMechanic(Request $request)
+    {
+        $validated = $request->validate([
+            'first_name' => 'required|min:3',
+            'last_name' => 'required|min:3',
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+            'phone' => 'required',
+            'address' => 'required',
+        ]);
+
+        if (!$validated) {
+            return redirect()->back()->withErrors($validated)->withInput();
+        }
+        ;
+
+        $user = User::where('email', $request->email)->first();
+
+        if ($user) {
+            return redirect()->back()->withErrors("User already exists")->withInput();
+        }
+
+        $data = $request->all();
+        $data["password"] = Hash::make($data["password"]);
+        $createUser = $this->createMechanicians($data);
+        return redirect()->route('mechanicians')->withSuccess('User created successfully');
     }
 }

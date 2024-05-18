@@ -22,7 +22,7 @@
 
 <div class="py-5 px-10">
     <h3 class="text-xl mb-5 text-gray-200">
-        Import Clients
+        Import Vehicles
     </h3>
     <form action="" method="post" enctype="multipart/form-data">
         @csrf
