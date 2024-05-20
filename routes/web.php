@@ -90,12 +90,12 @@ Route::get('/dashboard/mechanicians/add', [DashBoardViews::class, "addmechanic"]
 Route::post('/dashboard/mechanicians/add', [UserController::class, "addNewMechanic"]);
 
 
-Route::get('/import-mechanic', [ImportController::class, 'index'])->name('import.mechanic.get');
+Route::get('/import-mechanic', [ImportController::class, 'index3'])->name('import.mechanic.get');
 
-Route::post('/import-mechanic', [ImportController::class, 'import'])->name('import.mechanic.post');
+Route::post('/import-mechanic', [ImportController::class, 'import3'])->name('import.mechanic.post');
 
-Route::get('/export-mechanic', [ExportController::class, 'index'])->name('export.mechanic.get');
+Route::get('/export-mechanic', [ExportController::class, 'index3'])->name('export.mechanic.get');
 
-Route::get('/export-mechanics-pdf', [ExportController::class, 'exportUsersPdf'])->name('export.mechanics.pdf');
+Route::get('/export-mechanics-pdf', [ExportController::class, 'exportMechanicsPdf'])->name('export.mechanics.pdf');
 
-Route::get('/export-mechanics', [ExportController::class, 'exportUsers'])->name('export.mechanic');
+Route::get('/export-mechanics', [ExportController::class, 'exportMechanics'])->name('export.mechanic');

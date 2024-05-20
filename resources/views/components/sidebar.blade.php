@@ -18,8 +18,8 @@
         <span class="text-slate-200  text-2xl mb-1 flex justify-between items-center px-2">Mechanicians <i class="fa-solid fa-chevron-down text-sm"></i></span>
         <li class="text-slate-200   text-lg "><a href="{{route("mechanicians")}}" class="shadow-md py-1 px-3 bg-slate-500 rounded flex gap-3 items-center"><i class="fa-solid fa-users-gear text-slate-800 min-w-5"></i> Mechanicians List</a></li>
         <li class="text-slate-200   text-lg "><a href="{{route("dashboard.mechanicians.add")}}" class="shadow-md py-1 px-3 bg-slate-500 rounded flex gap-3 items-center"><i class="fa-solid fa-person-circle-plus text-slate-800 min-w-5"></i> Add Mechanician</a></li>
-        <li class="text-slate-200   text-lg "><a href="#" class="shadow-md py-1 px-3 bg-slate-500 rounded flex gap-3 items-center"><i class="fa-solid fa-file-arrow-up text-slate-800 min-w-5"></i> Import Mechanicians</a></li>
-        <li class="text-slate-200   text-lg "><a href="#" class="shadow-md py-1 px-3 bg-slate-500 rounded flex gap-3 items-center"><i class="fa-solid fa-file-arrow-down text-slate-800 min-w-5"></i> Export Mechanicians</a></li>
+        <li class="text-slate-200   text-lg "><a href="{{route("import.mechanic.get")}}" class="shadow-md py-1 px-3 bg-slate-500 rounded flex gap-3 items-center"><i class="fa-solid fa-file-arrow-up text-slate-800 min-w-5"></i> Import Mechanicians</a></li>
+        <li class="text-slate-200   text-lg "><a href="{{route("export.mechanic.get")}}" class="shadow-md py-1 px-3 bg-slate-500 rounded flex gap-3 items-center"><i class="fa-solid fa-file-arrow-down text-slate-800 min-w-5"></i> Export Mechanicians</a></li>
     </ul>
 
     <ul class="flex flex-col gap-2 py-3 px-3">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\MechanicsImport;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use App\Imports\VehiclesImport;
@@ -46,6 +47,25 @@ class ImportController extends Controller
             return redirect()->back()->with('success', 'Excel data imported successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error importing Excel data: ' . $e->getMessage());
+        }
+    }
+
+    public function index3()
+    {
+        return view('pages.dashboard.mechanicsImport');
+    }
+    public function import3(Request $request)
+    {
+        $request->validate([
+            'excel_file' => 'required|mimes:xlsx,xls,csv',
+        ]);
+
+        try {
+            Excel::import(new MechanicsImport, $request->file('excel_file'));
+
+            return redirect()->back()->with('success', 'Mechanics imported successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error importing mechanics: ' . $e->getMessage());
         }
     }
 }

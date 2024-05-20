@@ -16,10 +16,17 @@ class DashBoardViews extends Controller
         $mechanicsNumber = User::where('role', 'MECHANIC')->count();
         $vehiclesNumber = Vehicle::all()->count();
 
+        $chart = [
+            "clients" => $usersNumber,
+            "mechanics" => $mechanicsNumber,
+            "vehicles" => $vehiclesNumber
+        ];
+
         return view('pages.dashboard.stats', [
             'usersNumber' => $usersNumber,
             'vehiclesNumber' => $vehiclesNumber,
-            "mechanicsNumber" => $mechanicsNumber
+            "mechanicsNumber" => $mechanicsNumber,
+            'chart' =>  $chart
         ]);
     }
 
