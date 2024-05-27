@@ -33,6 +33,11 @@ class User extends Authenticatable
         return $this->hasMany(Vehicle::class, 'clientID');
     }
 
+    public function reparations()
+    {
+        return $this->hasMany(Reparation::class, 'mechanicID');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -51,4 +56,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
 }

@@ -52,6 +52,9 @@
         <div class="mt-5 flex">
             <button type="submit" class="py-2 px-3 w-full bg-slate-800 text-slate-200 rounded text-md shadow-md">Register</button>
         </div>
+        <div class="mt-5 text-center">
+            <p class="text-sm text-slate-500">Already have an account? <a href="{{ route('login') }}" class="text-slate-800">Log In</a></p>
+        </div>
     </form>
 </div>
 

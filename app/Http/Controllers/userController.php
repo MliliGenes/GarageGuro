@@ -37,9 +37,13 @@ class UserController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        // dd($credentials);
-
         if (Auth::attempt($credentials)) {
+            if ($request->has('remember_me')) {
+                Auth::loginUsingId(Auth::user()->id, true);
+            } else {
+                Auth::loginUsingId(Auth::user()->id);
+            }
+
             return redirect()->route("dashboard.stats")
                 ->withSuccess('You have Successfully loggedin');
         }
@@ -243,5 +247,18 @@ class UserController extends Controller
         $data["password"] = Hash::make($data["password"]);
         $createUser = $this->createMechanicians($data);
         return redirect()->route('mechanicians')->withSuccess('User created successfully');
+    }
+
+    public function search(Request $request)
+    {
+        $searchQuery = $request->search;
+        $users = User::where('role', 'CLIENT')
+            ->where(function ($query) use ($searchQuery) {
+                $query->where('firstName', 'like', '%' . $searchQuery . '%')
+                    ->orWhere('lastName', 'like', '%' . $searchQuery . '%');
+            })
+            ->paginate(10);
+        // dd($users);
+        return view("pages.dashboard.clients", ['users' => $users]);
     }
 }

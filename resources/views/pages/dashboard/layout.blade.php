@@ -25,7 +25,7 @@
         <div class="flex w-full">
             @include('components.sidebar')
             <main class=" flex-1 bg-slate-900 ">
-                <div class="w-full flex-1">
+                <div class="w-full flex-1 overflow-y-auto h-screen">
                     @yield('content')
                 </div>
             </main>

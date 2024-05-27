@@ -6,6 +6,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\VehiculController;
+use App\Http\Controllers\SparePartController;
+use App\Http\Controllers\ReparationController;
+use App\Http\Controllers\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +29,14 @@ Route::post('/login', [UserController::class, 'login_post'])->name('login');
 
 Route::get('logout', [UserController::class, 'logout'])->name('logout');
 
+Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+
+Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
+
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+
+Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
 Route::get('/', function () {
     return redirect()->route("dashboard.stats");
 })->middleware(['auth'])->name('dashboard');
@@ -36,6 +47,8 @@ Route::get('account/verify/{token}', [UserController::class, 'verifyAccount'])->
 Route::get('/dashboard/stats', [DashBoardViews::class, 'stats'])->name('dashboard.stats');
 
 Route::get('/dashboard/clients', [DashBoardViews::class, 'clients'])->name('dashboard.clients');
+
+Route::get('/dashboard/clients/search', [UserController::class, 'search'])->name('dashboard.clients.search');
 
 Route::get('/dashboard/client/{id}', [UserController::class, 'getClient'])->name('dashboard.client');
 
@@ -99,3 +112,22 @@ Route::get('/export-mechanic', [ExportController::class, 'index3'])->name('expor
 Route::get('/export-mechanics-pdf', [ExportController::class, 'exportMechanicsPdf'])->name('export.mechanics.pdf');
 
 Route::get('/export-mechanics', [ExportController::class, 'exportMechanics'])->name('export.mechanic');
+
+Route::prefix('spareparts')->group(function () {
+    Route::get('/', [SparePartController::class, 'index'])->name('spareparts.index');
+    Route::get('/create', [SparePartController::class, 'create'])->name('spareparts.create');
+    Route::post('/', [SparePartController::class, 'store'])->name('spareparts.store');
+    Route::get('/{id}', [SparePartController::class, 'show'])->name('spareparts.show');
+    Route::put('/update', [SparePartController::class, 'update'])->name('spareparts.update');
+    Route::delete('/delete', [SparePartController::class, 'destroy'])->name('spareparts.destroy');
+});
+
+
+Route::prefix('reparations')->group(function () {
+    Route::get('/', [ReparationController::class, 'index'])->name('reparations.index');
+    Route::get('/create', [ReparationController::class, 'create'])->name('reparations.create');
+    Route::post('/', [ReparationController::class, 'store'])->name('reparations.store');
+    Route::get('/{id}', [ReparationController::class, 'show'])->name('reparations.show');
+    Route::put('/update', [ReparationController::class, 'update'])->name('reparations.update');
+    Route::delete('/delete', [ReparationController::class, 'destroy'])->name('reparations.destroy');
+});

@@ -17,9 +17,18 @@
             <i class="fa-solid fa-users-gear text-3xl text-slate-300"></i>
         </div>
     </div>
-    <div class="max-w-2xl ">
-        <canvas id="myPieChart" ></canvas>
+    <div class="w-full h-full  grid grid-cols-3 gap-5 mb-5">
+        <div class="max-w-xl ">
+            <canvas class="myPieChart1" ></canvas>
+        </div>
+        <div class="max-w-xl ">
+            <canvas class="myPieChart2" ></canvas>
+        </div>
+        <div class="max-w-xl ">
+            <canvas class="myPieChart3" ></canvas>
+        </div>
     </div>
+
 
 </div>
 
@@ -28,7 +37,7 @@
     const chartData = <?php echo json_encode($chart); ?>;
 
     // Get the context of the canvas element we want to select
-    const ctx = document.getElementById('myPieChart').getContext('2d');
+    const ctx = document.querySelector('.myPieChart1').getContext('2d');
 
     // Create the pie chart
     const myPieChart = new Chart(ctx, {
