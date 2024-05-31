@@ -44,8 +44,8 @@ class UserController extends Controller
                 Auth::loginUsingId(Auth::user()->id);
             }
 
-            return redirect()->route("dashboard.stats")
-                ->withSuccess('You have Successfully loggedin');
+            return redirect()->route("split");
+
         }
 
         return redirect("login")->withErrors('You have entered invalid credentials');

@@ -13,4 +13,9 @@ class Facture extends Model
         'additionalCharges',
         'totalAmount'
     ];
+
+    public function reparation()
+    {
+        return $this->belongsTo(Reparation::class, 'repairID');
+    }
 }

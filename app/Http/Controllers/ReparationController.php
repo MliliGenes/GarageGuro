@@ -26,7 +26,6 @@ class ReparationController extends Controller
             'description' => 'required|string',
             'status' => 'required|string',
             'startDate' => 'required|date',
-            'endDate' => 'required|date',
             'mechanicNotes' => 'nullable|string',
             'clientNotes' => 'nullable|string',
             'mechanicID' => 'required|numeric',

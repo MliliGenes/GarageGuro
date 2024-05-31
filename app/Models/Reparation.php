@@ -8,10 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Reparation extends Model
 {
     use HasFactory;
-    const STATUS_PENDING = 'Pending';
-    const STATUS_IN_PROGRESS = 'In_Progress';
-    const STATUS_COMPLETED = 'Completed';
-    const STATUS_CANCELLED = 'Cancelled';
 
     protected $fillable = [
         'description',
@@ -34,13 +30,8 @@ class Reparation extends Model
         return $this->belongsTo(Vehicle::class, 'vehicleID');
     }
 
-    public function getStatusOptions()
+    public function factures()
     {
-        return [
-            self::STATUS_PENDING,
-            self::STATUS_IN_PROGRESS,
-            self::STATUS_COMPLETED,
-            self::STATUS_CANCELLED,
-        ];
+        return $this->hasMany(Facture::class, 'repairID');
     }
 }

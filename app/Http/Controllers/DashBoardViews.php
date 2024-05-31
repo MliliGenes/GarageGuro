@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Facture;
+use App\Models\Reparation;
 use App\Models\User;
 use App\Models\Vehicle;
+use App\Models\SparePart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,18 +18,27 @@ class DashBoardViews extends Controller
         $usersNumber = User::where('role', 'CLIENT')->count();
         $mechanicsNumber = User::where('role', 'MECHANIC')->count();
         $vehiclesNumber = Vehicle::all()->count();
+        $partsNumber = SparePart::all()->count();
+        $reparationsNumber = Reparation::all()->count();
+        $invoicesNumber = Facture::all()->count();
 
         $chart = [
             "clients" => $usersNumber,
             "mechanics" => $mechanicsNumber,
-            "vehicles" => $vehiclesNumber
+            "vehicles" => $vehiclesNumber,
+            "parts" => $partsNumber,
+            "reparations" => $reparationsNumber,
+            "invoices" => $invoicesNumber
         ];
 
         return view('pages.dashboard.stats', [
             'usersNumber' => $usersNumber,
             'vehiclesNumber' => $vehiclesNumber,
             "mechanicsNumber" => $mechanicsNumber,
-            'chart' =>  $chart
+            "partsNumber" => $partsNumber,
+            "reparationsNumber" => $reparationsNumber,
+            "invoicesNumber" => $invoicesNumber,
+            'chart' => $chart
         ]);
     }
 
