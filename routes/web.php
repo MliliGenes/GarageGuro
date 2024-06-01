@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ClientDashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashBoardViews;
@@ -8,10 +7,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\FactureController;
+use App\Http\Controllers\MechanicContoller;
 use App\Http\Controllers\VehiculController;
 use App\Http\Controllers\SparePartController;
 use App\Http\Controllers\ReparationController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ClientDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,8 @@ Route::get('/', function () {
         return redirect()->route("dashboard.stats");
     } elseif (Auth::check() && Auth::user()->role == 'CLIENT') {
         return redirect()->route("client.info");
+    } elseif (Auth::check() && Auth::user()->role == 'MECHANIC') {
+        return redirect()->route("mechanic.info");
     }
 })->name("split");
 
@@ -123,4 +126,12 @@ Route::middleware(['auth', 'client'])->group(function () {
     Route::get('/client/reparations', [ClientDashboardController::class, 'reparations'])->name('client.reparations');
     Route::get('/client/invoices', [ClientDashboardController::class, 'invoices'])->name('client.invoices');
     Route::get('/{facture}/download', [FactureController::class, 'download'])->name('factures.download');
+});
+
+Route::middleware(['auth', "mechanic"])->group(function () {
+    Route::get('/mechanic/info', [ClientDashboardController::class, 'clientInfo'])->name('mechanic.info');
+    Route::put('/client/update/{id}', [ClientDashboardController::class, 'update'])->name('user.update');
+    Route::get('/mechanic/reparations', [MechanicContoller::class, 'mechanicRepairs'])->name('mechanic.repairs');
+    Route::get('reparations/{id}', [ReparationController::class, 'show'])->name('reparations.show');
+    Route::put('reparations/update', [ReparationController::class, 'update'])->name('reparations.update');
 });

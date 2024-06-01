@@ -69,4 +69,13 @@
     </ul>
 
     @endif
+    @if (Auth::user()->role == "MECHANIC")
+
+    <ul class="flex flex-col gap-2 py-3 px-3">
+        <span class="text-slate-200 text-2xl mb-1 flex justify-between items-center px-2">Profile <i class="fa-solid fa-chevron-down text-sm"></i></span>
+        <li class="text-slate-200   text-lg "><a href="{{route("mechanic.info")}}" class="shadow-md py-1 px-3 bg-slate-500 rounded flex gap-3 items-center"><i class="fa-solid  fa-circle-info text-slate-800 min-w-5"></i> Mechanic information </a></li>
+        <li class="text-slate-200   text-lg "><a href="{{route("mechanic.repairs")}}" class="shadow-md py-1 px-3 bg-slate-500 rounded flex gap-3 items-center"><i class="fa-solid  fa-wrench text-slate-800 min-w-5"></i> Mechanic reparations </a></li>
+    </ul>
+
+    @endif
 </aside>
