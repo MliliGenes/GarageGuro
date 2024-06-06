@@ -17,43 +17,43 @@
 
 <div class="px-20 py-4 w-full">
     <div class="mb-8">
-        <h2 class="text-4xl text-slate-800 mb-2">Sign Up</h2>
-        <p class="text-slate-500 text-md ">Sign up now and start exploring our platform!</p>
+        <h2 class="text-4xl text-gray-800 mb-2">Sign Up</h2>
+        <p class="text-gray-500 text-md ">Sign up now and start exploring our platform!</p>
     </div>
     <form action="" method="post" class="flex flex-col gap-2" >
         @csrf
        <div class="flex gap-4">
         <div class="flex flex-col gap-2 flex-1">
-            <label for="first_name" class="text-slate-500 block text-sm pl-2">First Name</label>
+            <label for="first_name" class="text-gray-500 block text-sm pl-2">First Name</label>
             <input class="w-full py-2 px-3 rounded shadow-md" type="text" name="first_name" id="" >
         </div>
         <div class="flex flex-col gap-2 flex-1">
-            <label for="first_name" class="text-slate-500 block text-sm pl-2">Last Name</label>
+            <label for="first_name" class="text-gray-500 block text-sm pl-2">Last Name</label>
             <input class="w-full py-2 px-3 rounded shadow-md" type="text" name="last_name" id="" >
         </div>
        </div>
         <div class="flex flex-col gap-2">
-            <label for="email" class="text-slate-500 block text-sm pl-2">Phone</label>
+            <label for="email" class="text-gray-500 block text-sm pl-2">Phone</label>
             <input class="w-full py-2 px-3 rounded shadow-md" type="phone" name="phone" id="" >
         </div>
         <div class="flex flex-col gap-2">
-            <label for="address" class="text-slate-500 block text-sm pl-2">Address</label>
+            <label for="address" class="text-gray-500 block text-sm pl-2">Address</label>
             <input class="w-full py-2 px-3 rounded shadow-md" type="text" name="address" id="" >
         </div>
         <div class="flex flex-col gap-2">
-            <label for="email" class="text-slate-500 block text-sm pl-2">Email</label>
+            <label for="email" class="text-gray-500 block text-sm pl-2">Email</label>
             <input class="w-full py-2 px-3 rounded shadow-md" type="email" name="email" id="" >
         </div>
         <div class="flex flex-col gap-2">
-            <label for="password" class="text-slate-500 block text-sm pl-2">Password</label>
+            <label for="password" class="text-gray-500 block text-sm pl-2">Password</label>
             <input class="w-full py-2 px-3 rounded shadow-md" type="password" name="password" id="" >
         </div>
 
         <div class="mt-5 flex">
-            <button type="submit" class="py-2 px-3 w-full bg-slate-800 text-slate-200 rounded text-md shadow-md">Register</button>
+            <button type="submit" class="py-2 px-3 w-full bg-gray-800 text-gray-200 rounded text-md shadow-md">Register</button>
         </div>
         <div class="mt-5 text-center">
-            <p class="text-sm text-slate-500">Already have an account? <a href="{{ route('login') }}" class="text-slate-800">Log In</a></p>
+            <p class="text-sm text-gray-500">Already have an account? <a href="{{ route('login') }}" class="text-gray-800">Log In</a></p>
         </div>
     </form>
 </div>

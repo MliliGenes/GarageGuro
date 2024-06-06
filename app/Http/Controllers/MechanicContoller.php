@@ -17,4 +17,5 @@ class MechanicContoller extends Controller
 
         return view('pages.mechanic.repairs', compact('repairs'));
     }
+
 }

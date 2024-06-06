@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\UserVerify;
+use App\Models\Vehicle;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -260,5 +261,30 @@ class UserController extends Controller
             ->paginate(10);
         // dd($users);
         return view("pages.dashboard.clients", ['users' => $users]);
+    }
+
+    public function search2(Request $request)
+    {
+        $searchQuery = $request->search;
+        $users = User::where('role', 'MECHANIC')
+            ->where(function ($query) use ($searchQuery) {
+                $query->where('firstName', 'like', '%' . $searchQuery . '%')
+                    ->orWhere('lastName', 'like', '%' . $searchQuery . '%');
+            })
+            ->paginate(10);
+        // dd($users);
+        return view("pages.dashboard.clients", ['users' => $users]);
+    }
+
+    public function search3(Request $request)
+    {
+        $searchQuery = $request->search;
+        $vehicles = Vehicle::where(function ($query) use ($searchQuery) {
+            $query->where('make', 'like', '%' . $searchQuery . '%')
+                ->orWhere('model', 'like', '%' . $searchQuery . '%');
+        })->paginate(10);
+        $clients = User::where("role", "CLIENT")->get();
+        // dd($vehicles);
+        return view("pages.dashboard.vehicles", ['vehicles' => $vehicles, "clients" => $clients]);
     }
 }

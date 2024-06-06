@@ -17,14 +17,17 @@
 <div>
 
     <div class="relative overflow-x-auto">
-        <table class="w-full text-sm text-left rtl:text-right text-slate-500 dark:text-slate-400">
-            <thead class="text-xs text-slate-700 uppercase bg-slate-50 dark:bg-slate-700 dark:text-slate-400">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
                         ID
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Repair ID
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Repair amount
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Additional Charges
@@ -45,12 +48,15 @@
             </thead>
             <tbody>
                 @foreach ($factures as $facture)
-                <tr class="bg-white border-b dark:bg-slate-800 dark:border-slate-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap dark:text-white">
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{$facture->id}}
                     </th>
                     <td class="px-6 py-4">
                         {{$facture->reparation->id}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{$facture->amount}}
                     </td>
                     <td class="px-6 py-4">
                         {{$facture->additionalCharges}}
@@ -139,6 +145,11 @@
                     </div>
 
                     <div class="mb-5">
+                        <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Repair Amount</label>
+                        <input type="number" id="amount" name="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Repair Amount" required />
+                    </div>
+
+                    <div class="mb-5">
                         <label for="additionalCharges" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Additional Charges</label>
                         <input type="number" id="additionalCharges" name="additionalCharges" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Additional Charges" required />
                     </div>
@@ -159,9 +170,20 @@
                 </form>
             </div>
         </div>
+        <script>
+            $(document).ready(function() {
+            // Calculate total amount on change of either amount or additionalCharges
+            $("#amount, #additionalCharges").on("change", function() {
+                var amount = parseFloat($("#amount").val()) || 0;
+                var additionalCharges = parseFloat($("#additionalCharges").val()) || 0;
+                var totalAmount = amount + additionalCharges;
+                $("#totalAmount").val(totalAmount.toFixed(2)); // Set total amount with 2 decimal places
+            });
+            });
+        </script>
     </div>
 
-    <div class="bg-slate-600">
+    <div class="bg-gray-600">
         {{ $factures->links() }}
     </div>
 </div>
@@ -182,6 +204,7 @@
             let factureData = await facture.json()
             console.log(factureData);
             $('#repairID').val(factureData.repairID);
+            $('#amount').val(factureData.amount);
             $('#additionalCharges').val(factureData.additionalCharges);
             $('#totalAmount').val(factureData.totalAmount);
             // Show the update modal

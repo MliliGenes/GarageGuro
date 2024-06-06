@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Models\Facture;
 use App\Models\Reparation;
 use Illuminate\Http\Request;
-use Dompdf\Dompdf;
-use Dompdf\Options;
+use Illuminate\Support\Facades\Mail;
 
 class FactureController extends Controller
 {
@@ -30,7 +31,22 @@ class FactureController extends Controller
             'totalAmount' => 'required|numeric',
         ]);
 
-        Facture::create($request->all());
+        $facture = Facture::create($request->all());
+
+        $vehicle = $facture->reparation->vehicle;
+        $owner = $vehicle->client;
+
+        $emailData = [
+            'facture' => $facture,
+            'owner' => $owner,
+            'vehicle' => $vehicle,
+        ];
+
+        Mail::send('email.invoice', $emailData, function ($message) use ($owner) {
+            $message->to($owner->email)
+                ->subject('Your Invoice Has Been Created');
+        });
+
         return redirect()->route('factures.index')->with('success', 'Invoice created successfully.');
     }
 
@@ -60,6 +76,8 @@ class FactureController extends Controller
 
         $facture = Facture::findOrFail($id);
         $facture->update($request->all());
+
+
         return redirect()->route('factures.index')->with('success', 'Invoice updated successfully.');
     }
 

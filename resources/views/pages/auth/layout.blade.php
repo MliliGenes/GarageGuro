@@ -17,10 +17,10 @@
     </style>
 </head>
 <body>
-    <div class="flex w-screen h-screen bg-slate-200 ">
-       <div class="flex-1 h-full bg-slate-800 relative">
+    <div class="flex w-screen h-screen bg-gray-200 ">
+       <div class="flex-1 h-full bg-gray-800 relative">
         <img src="{{asset('storage/imgs/1.jpg')}}" alt="" class="w-full h-full " style="object-fit:cover ;opacity: 0.8">
-        <div class="absolute inset-0 bg-gradient-to-l from-slate-200"></div>
+        <div class="absolute inset-0 bg-gradient-to-l from-gray-200"></div>
        </div>
        <div class="flex-1 flex justify-center items-center relative">@yield('content')</div>
     </div>

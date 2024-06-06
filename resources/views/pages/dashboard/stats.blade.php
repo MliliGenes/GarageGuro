@@ -2,39 +2,39 @@
 
 @section('content')
 <div class="px-10 py-5">
-<h1 class="text-2xl text-slate-200 mb-5 ">Statistics</h1>
+<h1 class="text-2xl text-gray-200 mb-5 ">Statistics</h1>
     <div class="w-full h-full  grid grid-cols-3 gap-5 mb-5">
-        <div class="h-20 bg-slate-600 rounded shadow-md text-slate-200 text-center flex items-center justify-between px-6 text-lg">
-            <div>{{$usersNumber}} <span class="text-slate-400 font-light italic">Clients</span></div>
-            <i class="fa-solid fa-people-group text-3xl text-slate-300"></i>
+        <div class="h-20 bg-gray-600 rounded shadow-md text-gray-200 text-center flex items-center justify-between px-6 text-lg">
+            <div>{{$usersNumber}} <span class="text-gray-400 font-light italic">{{ __("sidebar.clients") }}</span></div>
+            <i class="fa-solid fa-people-group text-3xl text-gray-300"></i>
         </div>
-        <div class="h-20 bg-slate-600 rounded shadow-md text-slate-200 text-center flex items-center justify-between px-6 text-lg">
-            <div>{{$vehiclesNumber}} <span class="text-slate-400 font-light italic">Vehicles</span></div>
-            <i class="fa-solid fa-car text-3xl text-slate-300"></i>
+        <div class="h-20 bg-gray-600 rounded shadow-md text-gray-200 text-center flex items-center justify-between px-6 text-lg">
+            <div>{{$vehiclesNumber}} <span class="text-gray-400 font-light italic">{{ __("sidebar.vehicles") }}</span></div>
+            <i class="fa-solid fa-car text-3xl text-gray-300"></i>
         </div>
-        <div class="h-20 bg-slate-600 rounded shadow-md text-slate-200 text-center flex items-center justify-between px-6 text-lg">
-            <div>{{$mechanicsNumber}} <span class="text-slate-400 font-light italic">Mechanics</span></div>
-            <i class="fa-solid fa-users-gear text-3xl text-slate-300"></i>
+        <div class="h-20 bg-gray-600 rounded shadow-md text-gray-200 text-center flex items-center justify-between px-6 text-lg">
+            <div>{{$mechanicsNumber}} <span class="text-gray-400 font-light italic">{{ __("sidebar.mechanicians") }}</span></div>
+            <i class="fa-solid fa-users-gear text-3xl text-gray-300"></i>
         </div>
-        <div class="h-20 bg-slate-600 rounded shadow-md text-slate-200 text-center flex items-center justify-between px-6 text-lg">
-            <div>{{$partsNumber}} <span class="text-slate-400 font-light italic">Spare Parts</span></div>
-            <i class="fa-solid fa-car text-3xl text-slate-300"></i>
+        <div class="h-20 bg-gray-600 rounded shadow-md text-gray-200 text-center flex items-center justify-between px-6 text-lg">
+            <div>{{$partsNumber}} <span class="text-gray-400 font-light italic">{{ __("sidebar.parts") }}</span></div>
+            <i class="fa-solid fa-car text-3xl text-gray-300"></i>
         </div>
-        <div class="h-20 bg-slate-600 rounded shadow-md text-slate-200 text-center flex items-center justify-between px-6 text-lg">
-            <div>{{$reparationsNumber}} <span class="text-slate-400 font-light italic">Repairs</span></div>
-            <i class="fa-solid fa-wrench  text-3xl text-slate-300"></i>
+        <div class="h-20 bg-gray-600 rounded shadow-md text-gray-200 text-center flex items-center justify-between px-6 text-lg">
+            <div>{{$reparationsNumber}} <span class="text-gray-400 font-light italic">{{ __("sidebar.repairs") }}</span></div>
+            <i class="fa-solid fa-wrench  text-3xl text-gray-300"></i>
         </div>
-        <div class="h-20 bg-slate-600 rounded shadow-md text-slate-200 text-center flex items-center justify-between px-6 text-lg">
-            <div>{{$invoicesNumber}} <span class="text-slate-400 font-light italic">Invoices</span></div>
-            <i class="fa-solid fa-file-invoice text-3xl text-slate-300"></i>
+        <div class="h-20 bg-gray-600 rounded shadow-md text-gray-200 text-center flex items-center justify-between px-6 text-lg">
+            <div>{{$invoicesNumber}} <span class="text-gray-400 font-light italic">{{ __("sidebar.invoices") }}</span></div>
+            <i class="fa-solid fa-file-invoice text-3xl text-gray-300"></i>
         </div>
     </div>
-    <div class="w-full h-full  grid-flow-col grid grid-cols-3 gap-5 mb-5">
-        <div class="max-w-xl ">
+    <div class="w-full h-full flex gap-5 mb-5">
+        <div class="  flex-initial w-[25vw] ">
             <canvas class="myPieChart1" ></canvas>
         </div>
-        <div class="max-w-xl row-span-2 col-span-2">
-            <canvas class="myPieChart2" ></canvas>
+        <div class=" flex-1">
+            <canvas class="myPieChart2 " ></canvas>
         </div>
     </div>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reparation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ReparationController extends Controller
 {
@@ -34,6 +35,24 @@ class ReparationController extends Controller
         $reparation = Reparation::findOrFail($id);
         $reparation->update($request->all());
 
+        // Assume that you have a relation from Facture to Vehicle and Vehicle to Owner
+        $vehicle = $reparation->vehicle;
+        $owner = $vehicle->client;
+
+        // Send email to the vehicle owner
+        $emailData = [
+            'repair' => $reparation,
+            'owner' => $owner,
+            'vehicle' => $vehicle,
+        ];
+        // dd($emailData);
+
+        Mail::send('email.status', $emailData, function ($message) use ($owner) {
+            $message->to($owner->email)
+                ->subject('Your Vehicle Status Update');
+        });
+
+
         return redirect()->route('reparations.index')->with('success', 'Reparation updated successfully');
     }
 
@@ -54,6 +73,7 @@ class ReparationController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'description' => 'required|string',
             'status' => 'required|string',

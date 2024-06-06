@@ -16,7 +16,7 @@
                 <label for="status" class="block mb-2 text-sm text-gray-900 dark:text-white">Status</label>
                 <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     <option value="pending">Pending</option>
-                    <option value="in_progress">In Progress</option>
+                    <option value="in progress">In Progress</option>
                     <option value="completed">Completed</option>
                     <option value="canceled">Canceled</option>
                 </select>

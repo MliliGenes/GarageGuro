@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashBoardViews;
@@ -52,6 +53,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard/stats', [DashBoardViews::class, 'stats'])->name('dashboard.stats');
     Route::get('/dashboard/clients', [DashBoardViews::class, 'clients'])->name('dashboard.clients');
     Route::get('/dashboard/clients/search', [UserController::class, 'search'])->name('dashboard.clients.search');
+    Route::get('/dashboard/mechanics/search', [UserController::class, 'search2'])->name('dashboard.mechanics.search');
     Route::get('/dashboard/client/{id}', [UserController::class, 'getClient'])->name('dashboard.client');
     Route::post('/dashboard/client/delete', [UserController::class, 'deleteClient'])->name('dashboard.client.delete');
     Route::put('/dashboard/client/update', [UserController::class, 'updataeClient'])->middleware(['auth', 'verified'])->name('dashboard.client.update');
@@ -65,6 +67,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/export-users', [ExportController::class, 'exportUsers'])->name('export.users');
     Route::get('/dashboard/vehicles', [VehiculController::class, "getAllVecles"])->name('getAllVecles');
+    Route::get('/dashboard/vehicles/search', [UserController::class, 'search3'])->name('dashboard.vehicles.search');
     Route::post('/dashboard/vehicle/delete', [VehiculController::class, 'deletevehicle'])->name('dashboard.vehicle.delete');
     Route::get('/dashboard/vehicle/{id}', [VehiculController::class, 'getVehicleByID'])->name('dashboard.vehicle');
 
@@ -101,8 +104,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/', [ReparationController::class, 'index'])->name('reparations.index');
         Route::get('/create', [ReparationController::class, 'create'])->name('reparations.create');
         Route::post('/', [ReparationController::class, 'store'])->name('reparations.store');
-        Route::get('/{id}', [ReparationController::class, 'show'])->name('reparations.show');
-        Route::put('/update', [ReparationController::class, 'update'])->name('reparations.update');
+        // Route::put('/update', [ReparationController::class, 'update'])->name('reparations.update');
         Route::delete('/delete', [ReparationController::class, 'destroy'])->name('reparations.destroy');
     });
 
@@ -111,10 +113,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/create', [FactureController::class, 'create'])->name('factures.create');
         Route::post('/', [FactureController::class, 'store'])->name('factures.store');
         Route::get('/get/{id}', [FactureController::class, 'facturebyid'])->name('factures.show');
-
         Route::put('/', [FactureController::class, 'update'])->name('factures.update');
         Route::delete('/', [FactureController::class, 'destroy'])->name('factures.destroy');
-        Route::get('/{facture}/download', [FactureController::class, 'download'])->name('factures.download');
     });
 });
 
@@ -125,13 +125,26 @@ Route::middleware(['auth', 'client'])->group(function () {
     Route::get('/client/vehicles', [ClientDashboardController::class, 'clientVehicles'])->name('client.vehicles');
     Route::get('/client/reparations', [ClientDashboardController::class, 'reparations'])->name('client.reparations');
     Route::get('/client/invoices', [ClientDashboardController::class, 'invoices'])->name('client.invoices');
-    Route::get('/{facture}/download', [FactureController::class, 'download'])->name('factures.download');
+
 });
 
 Route::middleware(['auth', "mechanic"])->group(function () {
     Route::get('/mechanic/info', [ClientDashboardController::class, 'clientInfo'])->name('mechanic.info');
     Route::put('/client/update/{id}', [ClientDashboardController::class, 'update'])->name('user.update');
     Route::get('/mechanic/reparations', [MechanicContoller::class, 'mechanicRepairs'])->name('mechanic.repairs');
-    Route::get('reparations/{id}', [ReparationController::class, 'show'])->name('reparations.show');
-    Route::put('reparations/update', [ReparationController::class, 'update'])->name('reparations.update');
 });
+
+
+Route::get('/{facture}/download', [FactureController::class, 'download'])->name('factures.download');
+
+Route::get('/reparations/{id}', [ReparationController::class, 'show'])->name('reparations.show');
+
+Route::put('reparations/update', [ReparationController::class, 'update'])->name('reparations.update');
+
+
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, array_values(config('app.available_locales')))) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('locale.switch');

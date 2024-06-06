@@ -24,7 +24,7 @@
         @include('components.header')
         <div class="flex w-full">
             @include('components.sidebar')
-            <main class=" flex-1 bg-slate-900 ">
+            <main class=" flex-1 bg-gray-900 ">
                 <div class="w-full flex-1 overflow-y-auto h-screen">
                     @yield('content')
                 </div>

@@ -20,13 +20,18 @@
             </div>
 
             <div class="mb-5">
+                <label for="amount" class="block mb-2 text-sm text-gray-900 dark:text-white">Repair Amount</label>
+                <input type="number" id="amount" name="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Repair Amount" step="0.01" required />
+            </div>
+
+            <div class="mb-5">
                 <label for="additionalCharges" class="block mb-2 text-sm text-gray-900 dark:text-white">Additional Charges</label>
                 <input type="number" id="additionalCharges" name="additionalCharges" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Additional Charges" step="0.01" required />
             </div>
 
             <div class="mb-5">
                 <label for="totalAmount" class="block mb-2 text-sm text-gray-900 dark:text-white">Total Amount</label>
-                <input type="number" id="totalAmount" name="totalAmount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Total Amount" step="0.01" required />
+                <input type="number" id="totalAmount" name="totalAmount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Total Amount" step="0.01" required readonly/>
             </div>
 
             <div class="flex justify-end space-x-4">
@@ -37,5 +42,17 @@
         </form>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+    // Calculate total amount on change of either amount or additionalCharges
+    $("#amount, #additionalCharges").on("change", function() {
+        var amount = parseFloat($("#amount").val()) || 0;
+        var additionalCharges = parseFloat($("#additionalCharges").val()) || 0;
+        var totalAmount = amount + additionalCharges;
+        $("#totalAmount").val(totalAmount.toFixed(2)); // Set total amount with 2 decimal places
+    });
+    });
+</script>
 
 @endsection

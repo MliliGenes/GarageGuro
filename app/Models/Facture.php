@@ -10,6 +10,7 @@ class Facture extends Model
     use HasFactory;
     protected $fillable = [
         'repairID',
+        "amount",
         'additionalCharges',
         'totalAmount'
     ];
